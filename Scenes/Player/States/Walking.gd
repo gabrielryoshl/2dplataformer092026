@@ -9,6 +9,11 @@ const ACCELERATION: float = 10
 @onready var input_component: InputComponent = %InputComponent
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
+@onready var dust_particles_2d: CPUParticles2D = %DustParticles2D
+
+
+func on_exit() -> void:
+	dust_particles_2d.emitting = false
 
 
 func on_process(_delta: float) -> void:
@@ -39,3 +44,5 @@ func on_physics_process(delta: float) -> void:
 	
 	player.velocity.x += velocity_diff * ACCELERATION * delta
 	player.move_and_slide()
+	
+	dust_particles_2d.emitting = true

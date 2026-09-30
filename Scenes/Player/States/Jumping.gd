@@ -7,12 +7,18 @@ const ACCELERATION: float = 5
 @onready var player: CharacterBody2D = $"../.."
 @onready var input_component: InputComponent = %InputComponent
 @onready var jump_cancel_timer: Timer = %JumpCancelTimer
+@onready var jump_dust_particles_2d: CPUParticles2D = %JumpDustParticles2D
+@onready var jump_dust_particles_2d_2: CPUParticles2D = %JumpDustParticles2D2
 
 
 func on_enter() -> void:
 	input_component.consume_jump_buffer()
 	player.velocity.y -= 300
 	jump_cancel_timer.start()
+	if not jump_dust_particles_2d.emitting:
+		jump_dust_particles_2d.emitting = true
+	else:
+		jump_dust_particles_2d_2.emitting = true
 
 
 func on_process(_delta: float) -> void:

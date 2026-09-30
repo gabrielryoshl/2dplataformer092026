@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c3lo8df58rpq0" path="res://Scenes/Player/States/Jumping.gd" id="5_t26db"]
 [ext_resource type="Script" uid="uid://cjd7ddtdqcsjw" path="res://Scenes/Player/States/FloorPrimary.gd" id="7_825xp"]
 [ext_resource type="Script" uid="uid://dalajryvwe50l" path="res://Scenes/Player/States/FloorSecondary.gd" id="8_ji083"]
+[ext_resource type="Texture2D" uid="uid://bn6136nxade0f" path="res://Assets/Placeholders/Dust2x2.png" id="11_0kmp4"]
 
 [sub_resource type="Animation" id="Animation_825xp"]
 resource_name = "FloorPrimary"
@@ -47,6 +48,15 @@ _data = {
 &"FloorPrimary": SubResource("Animation_825xp"),
 &"RESET": SubResource("Animation_ji083")
 }
+
+[sub_resource type="Curve" id="Curve_0u84n"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -0.022472382), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_i5acl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.7256873, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebg8m"]
 size = Vector2(16, 24)
@@ -114,6 +124,91 @@ unique_name_in_owner = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1257692534]
 texture = ExtResource("1_s0eop")
+
+[node name="DustParticles2D" type="CPUParticles2D" parent="Visuals" unique_id=760788072]
+unique_name_in_owner = true
+position = Vector2(-4, 12)
+emitting = false
+texture = ExtResource("11_0kmp4")
+lifetime = 0.5
+explosiveness = 0.1
+randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(-1, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angle_min = -200.0
+angle_max = -200.0
+angle_curve = SubResource("Curve_0u84n")
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_i5acl")
+
+[node name="JumpDustParticles2D" type="CPUParticles2D" parent="Visuals" unique_id=729317396]
+unique_name_in_owner = true
+position = Vector2(0, 12)
+emitting = false
+texture = ExtResource("11_0kmp4")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.95
+randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+direction = Vector2(0, -1)
+spread = 80.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+angle_min = -200.0
+angle_max = -200.0
+angle_curve = SubResource("Curve_0u84n")
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_i5acl")
+
+[node name="JumpDustParticles2D2" type="CPUParticles2D" parent="Visuals" unique_id=1242013528]
+unique_name_in_owner = true
+position = Vector2(0, 12)
+emitting = false
+texture = ExtResource("11_0kmp4")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.95
+randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+direction = Vector2(0, -1)
+spread = 80.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+angle_min = -200.0
+angle_max = -200.0
+angle_curve = SubResource("Curve_0u84n")
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_i5acl")
+
+[node name="ExplosiveDustParticles2D" type="CPUParticles2D" parent="Visuals" unique_id=15702348]
+unique_name_in_owner = true
+position = Vector2(-4, 12)
+emitting = false
+texture = ExtResource("11_0kmp4")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(-1, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+angle_min = -200.0
+angle_max = -200.0
+angle_curve = SubResource("Curve_0u84n")
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_i5acl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1735371359]
 shape = SubResource("RectangleShape2D_ebg8m")
