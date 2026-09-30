@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://du7m5gmb5n3sr"]
+
+[ext_resource type="Script" uid="uid://suq07dtvr26i" path="res://Components/InputComponent.gd" id="1_4wape"]
+[ext_resource type="Script" uid="uid://djjxugx644rsn" path="res://Scenes/Player/Player.gd" id="1_ji083"]
+[ext_resource type="Script" uid="uid://cqbyd8jouj6s1" path="res://Components/StateMachine.gd" id="1_jmcll"]
+[ext_resource type="Texture2D" uid="uid://druoi5na6558h" path="res://Scenes/Player/Player16x24.png" id="1_s0eop"]
+[ext_resource type="Script" uid="uid://csjda8jnaltlw" path="res://Scenes/Player/States/Idle.gd" id="2_4wape"]
+[ext_resource type="Script" uid="uid://cwtd0nlcedjf3" path="res://Scenes/Player/States/Walking.gd" id="3_t26db"]
+[ext_resource type="Script" uid="uid://b12ol0tre4ckk" path="res://Scenes/Player/States/Falling.gd" id="4_fk5o5"]
+[ext_resource type="Script" uid="uid://c3lo8df58rpq0" path="res://Scenes/Player/States/Jumping.gd" id="5_t26db"]
+[ext_resource type="Script" uid="uid://cjd7ddtdqcsjw" path="res://Scenes/Player/States/FloorPrimary.gd" id="7_825xp"]
+[ext_resource type="Script" uid="uid://dalajryvwe50l" path="res://Scenes/Player/States/FloorSecondary.gd" id="8_ji083"]
+
+[sub_resource type="Animation" id="Animation_825xp"]
+resource_name = "FloorPrimary"
+length = 0.33333668405152855
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.33333334),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [0.0, 3.1415927, 6.2831855]
+}
+
+[sub_resource type="Animation" id="Animation_ji083"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ji083"]
+_data = {
+&"FloorPrimary": SubResource("Animation_825xp"),
+&"RESET": SubResource("Animation_ji083")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebg8m"]
+size = Vector2(16, 24)
+
+[node name="Player" type="CharacterBody2D" unique_id=1430241100]
+floor_constant_speed = true
+floor_snap_length = 3.0
+script = ExtResource("1_ji083")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1539752130]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_ji083")
+
+[node name="InputComponent" type="Node" parent="." unique_id=1614310432]
+unique_name_in_owner = true
+script = ExtResource("1_4wape")
+metadata/_custom_type_script = "uid://suq07dtvr26i"
+
+[node name="StateMachine" type="Node" parent="." unique_id=716075805 node_paths=PackedStringArray("current_state")]
+script = ExtResource("1_jmcll")
+current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://cqbyd8jouj6s1"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1177625365]
+script = ExtResource("2_4wape")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="Walking" type="Node" parent="StateMachine" unique_id=617183289]
+script = ExtResource("3_t26db")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="Jumping" type="Node" parent="StateMachine" unique_id=1540599013]
+script = ExtResource("5_t26db")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="JumpCancelTimer" type="Timer" parent="StateMachine/Jumping" unique_id=77326495]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[node name="Falling" type="Node" parent="StateMachine" unique_id=580079315]
+script = ExtResource("4_fk5o5")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/Falling" unique_id=1390288695]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[node name="FloorPrimary" type="Node" parent="StateMachine" unique_id=1446743204]
+script = ExtResource("7_825xp")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="FloorPrimaryCooldown" type="Timer" parent="StateMachine/FloorPrimary" unique_id=1206621442]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="FloorSecondary" type="Node" parent="StateMachine" unique_id=1479031253]
+script = ExtResource("8_ji083")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="Visuals" type="Node2D" parent="." unique_id=907236842]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1257692534]
+texture = ExtResource("1_s0eop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1735371359]
+shape = SubResource("RectangleShape2D_ebg8m")
