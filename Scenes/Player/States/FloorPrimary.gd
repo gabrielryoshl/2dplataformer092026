@@ -23,7 +23,7 @@ func on_enter() -> void:
 	
 	await animation_player.animation_finished
 	
-	change_state("Idle")
+	change_state("Falling")
 
 
 func on_exit() -> void:
