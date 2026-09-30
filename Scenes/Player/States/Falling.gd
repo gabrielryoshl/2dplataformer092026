@@ -1,7 +1,7 @@
 extends State
 
 
-const MOVE_SPEED: float = 150
+const MOVE_SPEED: float = 200
 const ACCELERATION: float = 5
 
 
