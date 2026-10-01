@@ -36,10 +36,10 @@ tracks/1/path = NodePath("Visuals/HandMarker2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.10000001, 0.33333334),
-"transitions": PackedFloat32Array(0.5, 2, 1),
+"times": PackedFloat32Array(0, 0.033333335, 0.10000001, 0.33333334),
+"transitions": PackedFloat32Array(0.5, 2, 2, 1),
 "update": 0,
-"values": [Vector2(-4, 2), Vector2(4, -2), Vector2(-4, 2)]
+"values": [Vector2(10.000002, 2), Vector2(-2, 10.000001), Vector2(-12, -2), Vector2(-4, 2)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -51,7 +51,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.10000001, 0.33333334),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
-"values": [-0.2617994, 2.8797932, 6.021385919380437]
+"values": [0.0, 3.926991, 6.021385919380437]
 }
 
 [sub_resource type="Animation" id="Animation_ji083"]
