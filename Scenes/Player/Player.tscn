@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://cjd7ddtdqcsjw" path="res://Scenes/Player/States/FloorPrimary.gd" id="7_825xp"]
 [ext_resource type="Script" uid="uid://dalajryvwe50l" path="res://Scenes/Player/States/FloorSecondary.gd" id="8_ji083"]
 [ext_resource type="Texture2D" uid="uid://bn6136nxade0f" path="res://Assets/Placeholders/Dust2x2.png" id="11_0kmp4"]
+[ext_resource type="Texture2D" uid="uid://cceyfm70m7lr8" path="res://Scenes/Player/Hand4x4.png" id="12_i5acl"]
+[ext_resource type="Texture2D" uid="uid://cyf36thyhwwol" path="res://Scenes/Player/FishingRod8x24.png" id="13_epg6k"]
 
 [sub_resource type="Animation" id="Animation_825xp"]
 resource_name = "FloorPrimary"
@@ -18,7 +20,7 @@ length = 0.33333668405152855
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/path = NodePath("Visuals/PlayerSprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,13 +29,37 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 3.1415927, 6.2831855]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/HandMarker2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.33333334),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(-4, 2), Vector2(4, -2), Vector2(-4, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/HandMarker2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.33333334),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [-0.2617994, 2.8797932, 6.021385919380437]
+}
 
 [sub_resource type="Animation" id="Animation_ji083"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/path = NodePath("Visuals/PlayerSprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,6 +67,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/HandMarker2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-4, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/HandMarker2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.2617994]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ji083"]
@@ -122,7 +172,7 @@ metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
 [node name="Visuals" type="Node2D" parent="." unique_id=907236842]
 unique_name_in_owner = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1257692534]
+[node name="PlayerSprite" type="Sprite2D" parent="Visuals" unique_id=1257692534]
 texture = ExtResource("1_s0eop")
 
 [node name="DustParticles2D" type="CPUParticles2D" parent="Visuals" unique_id=760788072]
@@ -209,6 +259,20 @@ angle_max = -200.0
 angle_curve = SubResource("Curve_0u84n")
 scale_amount_max = 1.5
 scale_amount_curve = SubResource("Curve_i5acl")
+
+[node name="HandSprite" type="Sprite2D" parent="Visuals" unique_id=1025454191]
+unique_name_in_owner = true
+top_level = true
+texture = ExtResource("12_i5acl")
+
+[node name="FishingRodSprite" type="Sprite2D" parent="Visuals/HandSprite" unique_id=585746455]
+position = Vector2(-1.4142135, -7.0710683)
+texture = ExtResource("13_epg6k")
+
+[node name="HandMarker2D" type="Marker2D" parent="Visuals" unique_id=1322480906]
+unique_name_in_owner = true
+position = Vector2(-4, 2)
+rotation = -0.2617994
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1735371359]
 shape = SubResource("RectangleShape2D_ebg8m")
