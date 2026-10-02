@@ -5,6 +5,7 @@ extends State
 @onready var input_component: InputComponent = %InputComponent
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var floor_secondary_cooldown: Timer = %FloorSecondaryCooldown
+@onready var explosive_dust_particles_2d_2: CPUParticles2D = %ExplosiveDustParticles2D2
 
 
 func on_enter() -> void:
@@ -19,6 +20,7 @@ func on_enter() -> void:
 	player.velocity += Vector2(action_direction, -height_boost) * 250
 	
 	animation_player.play("FloorSecondary")
+	explosive_dust_particles_2d_2.emitting = true
 	
 	await animation_player.animation_finished
 	
