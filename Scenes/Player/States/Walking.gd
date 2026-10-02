@@ -9,6 +9,7 @@ const ACCELERATION: float = 10
 @onready var input_component: InputComponent = %InputComponent
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
+@onready var floor_secondary_cooldown: Timer = %FloorSecondaryCooldown
 @onready var dust_particles_2d: CPUParticles2D = %DustParticles2D
 
 
@@ -30,7 +31,7 @@ func on_process(_delta: float) -> void:
 		change_state("FloorPrimary")
 		return
 	
-	if input_component.just_pressed_secondary:
+	if floor_secondary_cooldown.is_stopped() and input_component.just_pressed_secondary:
 		change_state("FloorSecondary")
 		return
 	

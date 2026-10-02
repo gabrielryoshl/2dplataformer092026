@@ -20,6 +20,7 @@ var is_pressing_secondary: bool
 
 var _jump_buffer_timer: Timer
 var _primary_action_buffer_timer: Timer
+var _secondary_action_buffer_timer: Timer
 
 
 func _ready() -> void:
@@ -37,6 +38,12 @@ func _ready() -> void:
 	_primary_action_buffer_timer.one_shot = true
 	
 	add_child(_primary_action_buffer_timer)
+	
+	_secondary_action_buffer_timer = Timer.new()
+	_secondary_action_buffer_timer.wait_time = BUFFER_TIME
+	_secondary_action_buffer_timer.one_shot = true
+	
+	add_child(_secondary_action_buffer_timer)
 
 
 func _process(_delta: float) -> void:
@@ -58,7 +65,10 @@ func _process(_delta: float) -> void:
 	just_pressed_primary = not _primary_action_buffer_timer.is_stopped()
 	is_pressing_primary = Input.is_action_pressed("primary_action")
 	
-	just_pressed_secondary = Input.is_action_just_pressed("secondary_action")
+	if Input.is_action_just_pressed("secondary_action"):
+		_secondary_action_buffer_timer.start()
+	
+	just_pressed_secondary = not _secondary_action_buffer_timer.is_stopped()
 	is_pressing_secondary = Input.is_action_pressed("secondary_action")
 
 
