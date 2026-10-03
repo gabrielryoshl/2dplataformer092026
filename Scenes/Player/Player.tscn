@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://c3lo8df58rpq0" path="res://Scenes/Player/States/Jumping.gd" id="5_t26db"]
 [ext_resource type="Script" uid="uid://cjd7ddtdqcsjw" path="res://Scenes/Player/States/FloorPrimary.gd" id="7_825xp"]
 [ext_resource type="Script" uid="uid://dalajryvwe50l" path="res://Scenes/Player/States/FloorSecondary.gd" id="8_ji083"]
+[ext_resource type="Script" uid="uid://by01rwy7pwtkq" path="res://Scenes/Player/States/WallJumping.gd" id="9_esmjy"]
+[ext_resource type="Script" uid="uid://cdb4n6pi1mjos" path="res://Scenes/Player/States/WallSliding.gd" id="10_0u84n"]
 [ext_resource type="Texture2D" uid="uid://bn6136nxade0f" path="res://Assets/Placeholders/Dust2x2.png" id="11_0kmp4"]
 [ext_resource type="Texture2D" uid="uid://cceyfm70m7lr8" path="res://Scenes/Player/Hand4x4.png" id="12_i5acl"]
 [ext_resource type="Texture2D" uid="uid://cyf36thyhwwol" path="res://Scenes/Player/FishingRod8x24.png" id="13_epg6k"]
@@ -152,6 +154,10 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebg8m"]
 size = Vector2(16, 24)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_esmjy"]
+radius = 8.0
+height = 24.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1430241100]
 floor_constant_speed = true
 floor_snap_length = 3.0
@@ -197,6 +203,19 @@ unique_name_in_owner = true
 wait_time = 0.05
 one_shot = true
 
+[node name="WallSliding" type="Node" parent="StateMachine" unique_id=1669785175]
+script = ExtResource("10_0u84n")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
+[node name="WallSlidingExitTimer" type="Timer" parent="StateMachine/WallSliding" unique_id=597365395]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="WallJumping" type="Node" parent="StateMachine" unique_id=1854354760]
+script = ExtResource("9_esmjy")
+metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
+
 [node name="FloorPrimary" type="Node" parent="StateMachine" unique_id=1446743204]
 script = ExtResource("7_825xp")
 metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
@@ -232,6 +251,25 @@ randomness = 0.25
 emission_shape = 3
 emission_rect_extents = Vector2(4, 1)
 direction = Vector2(-1, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angle_min = -200.0
+angle_max = -200.0
+angle_curve = SubResource("Curve_0u84n")
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_i5acl")
+
+[node name="WallslidingParticles2D" type="CPUParticles2D" parent="Visuals" unique_id=1933587163]
+position = Vector2(8, 0)
+emitting = false
+texture = ExtResource("11_0kmp4")
+lifetime = 0.5
+explosiveness = 0.1
+randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(1, 12)
+direction = Vector2(0, -1)
 gravity = Vector2(0, 100)
 initial_velocity_min = 10.0
 initial_velocity_max = 50.0
@@ -341,5 +379,11 @@ unique_name_in_owner = true
 position = Vector2(-4, 2)
 rotation = -0.2617994
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1735371359]
+[node name="DefaultCollisionShape" type="CollisionShape2D" parent="." unique_id=1735371359]
+unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_ebg8m")
+
+[node name="JumpingCollisionShape" type="CollisionShape2D" parent="." unique_id=200184408]
+unique_name_in_owner = true
+shape = SubResource("CapsuleShape2D_esmjy")
+disabled = true

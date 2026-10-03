@@ -1,11 +1,18 @@
 extends State
 
 
-@onready var player: CharacterBody2D = $"../.."
+@onready var player: Player = $"../.."
 @onready var input_component: InputComponent = %InputComponent
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
 @onready var floor_secondary_cooldown: Timer = %FloorSecondaryCooldown
+
+
+func on_enter() -> void:
+	if not player:
+		return
+	
+	player.wall_jumps = 0
 
 
 func on_process(_delta: float) -> void:

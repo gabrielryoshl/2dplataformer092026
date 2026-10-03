@@ -5,7 +5,7 @@ const MOVE_SPEED: float = 150
 const ACCELERATION: float = 10
 
 
-@onready var player: CharacterBody2D = $"../.."
+@onready var player: Player = $"../.."
 @onready var input_component: InputComponent = %InputComponent
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
@@ -14,6 +14,7 @@ const ACCELERATION: float = 10
 
 
 func on_exit() -> void:
+	player.wall_jumps = 0
 	dust_particles_2d.emitting = false
 
 

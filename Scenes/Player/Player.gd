@@ -1,10 +1,17 @@
+class_name Player
 extends CharacterBody2D
+
+
+const MAX_WALL_JUMPS: int = 5
 
 
 @onready var visuals: Node2D = %Visuals
 @onready var hand_sprite: Sprite2D = %HandSprite
 @onready var hand_marker_2d: Marker2D = %HandMarker2D
 
+
+var wall_jumps: int = 0
+var wall_sliding_normal: Vector2
 
 func _ready() -> void:
 	_update_fishing_rod(0.05)

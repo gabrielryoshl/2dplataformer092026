@@ -1,7 +1,7 @@
 extends State
 
 
-@onready var player: CharacterBody2D = $"../.."
+@onready var player: Player = $"../.."
 @onready var input_component: InputComponent = %InputComponent
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown

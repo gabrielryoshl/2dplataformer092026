@@ -5,7 +5,7 @@ const MOVE_SPEED: float = 200
 const ACCELERATION: float = 5
 
 
-@onready var player: CharacterBody2D = $"../.."
+@onready var player: Player = $"../.."
 @onready var input_component: InputComponent = %InputComponent
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
@@ -31,6 +31,11 @@ func on_process(_delta: float) -> void:
 	
 	if player.is_on_floor():
 		change_state("Idle" if is_zero_approx(Input.get_axis("move_left", "move_right")) else "Walking")
+		return
+	
+	if player.is_on_wall() and sign(player.get_wall_normal().x) != sign(Input.get_axis("move_left", "move_right")):
+		change_state("WallSliding")
+		return
 
 
 func on_physics_process(delta: float) -> void:
