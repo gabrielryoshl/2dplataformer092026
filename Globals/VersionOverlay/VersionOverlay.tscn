@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://g56ubq87vvwf"]
+
+[ext_resource type="Script" uid="uid://iyop8v6cn676" path="res://Globals/VersionOverlay/VersionOverlay.gd" id="1_0aymi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_42dy3"]
+font_size = 8
+font_color = Color(0.68235296, 0.68235296, 0.68235296, 0.5882353)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.5882353)
+
+[node name="VersionOverlay" type="CanvasLayer" unique_id=1378034783]
+layer = 99
+script = ExtResource("1_0aymi")
+
+[node name="VersionLabel" type="Label" parent="." unique_id=2085364445]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -25.0
+offset_right = -6.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0.0.0-development"
+label_settings = SubResource("LabelSettings_42dy3")
+horizontal_alignment = 2
+vertical_alignment = 2

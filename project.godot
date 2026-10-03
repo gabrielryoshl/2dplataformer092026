@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="2D Platformer"
+config/version="0.0.1-alpha"
 run/main_scene="uid://oyc7wcioc7mh"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+VersionOverlay="*uid://g56ubq87vvwf"
 
 [display]
 
