@@ -9,6 +9,7 @@ const ACCELERATION: float = 5
 @onready var input_component: InputComponent = %InputComponent
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
+@onready var wall_sliding_ray_cast: RayCast2D = %WallSlidingRayCast
 
 
 func on_exit() -> void:
@@ -30,16 +31,18 @@ func on_process(_delta: float) -> void:
 			return
 	
 	if player.is_on_floor():
-		change_state("Idle" if is_zero_approx(Input.get_axis("move_left", "move_right")) else "Walking")
+		change_state("Idle" if is_zero_approx(input_component.input_direction) else "Walking")
 		return
 	
-	if player.is_on_wall() and sign(player.get_wall_normal().x) != sign(Input.get_axis("move_left", "move_right")):
+	var is_on_wall := wall_sliding_ray_cast.is_colliding()
+	var wall_normal := wall_sliding_ray_cast.get_collision_normal()
+	if is_on_wall and sign(wall_normal.x) != sign(input_component.input_direction):
 		change_state("WallSliding")
 		return
 
 
 func on_physics_process(delta: float) -> void:
-	var desired_velocity := Input.get_axis("move_left", "move_right") * MOVE_SPEED
+	var desired_velocity := input_component.input_direction * MOVE_SPEED
 	var velocity_diff := desired_velocity - player.velocity.x
 	
 	player.velocity.x += velocity_diff * ACCELERATION * delta

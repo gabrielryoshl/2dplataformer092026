@@ -7,11 +7,17 @@ extends Node
 		if current_state:
 			current_state.on_exit()
 		
+		if show_state_changes:
+			print("%s -> %s" % [
+				current_state.name if current_state else &"NULL",
+				new_value.name if new_value else &"NULL"
+			])
 		current_state = new_value
 		
 		if current_state:
 			current_state.on_enter()
-
+@export_category("Debug")
+@export var show_state_changes: bool
 
 var _states: Dictionary[StringName, State]
 

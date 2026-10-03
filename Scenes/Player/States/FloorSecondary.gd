@@ -17,7 +17,7 @@ func on_enter() -> void:
 		player.velocity.x *= 0.25
 		height_boost += abs(player.velocity.x) / 100
 	
-	player.velocity += Vector2(action_direction, -height_boost) * 250
+	player.velocity += Vector2(action_direction, -height_boost) * 225
 	
 	animation_player.play("FloorSecondary")
 	explosive_dust_particles_2d_2.emitting = true
