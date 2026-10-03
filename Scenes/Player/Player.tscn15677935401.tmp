@@ -196,10 +196,6 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebg8m"]
 size = Vector2(16, 24)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6tu5v"]
-radius = 6.0
-height = 24.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_esmjy"]
 radius = 8.0
 height = 24.0
@@ -235,11 +231,6 @@ metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
 [node name="Sliding" type="Node" parent="StateMachine" unique_id=2055487379]
 script = ExtResource("6_6tu5v")
 metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
-
-[node name="SlidingCooldown" type="Timer" parent="StateMachine/Sliding" unique_id=468030136]
-unique_name_in_owner = true
-wait_time = 0.2
-one_shot = true
 
 [node name="Jumping" type="Node" parent="StateMachine" unique_id=1540599013]
 script = ExtResource("5_t26db")
@@ -278,7 +269,7 @@ metadata/_custom_type_script = "uid://bj7xgqcu7l2g5"
 
 [node name="FloorPrimaryCooldown" type="Timer" parent="StateMachine/FloorPrimary" unique_id=1206621442]
 unique_name_in_owner = true
-wait_time = 0.4
+wait_time = 0.2
 one_shot = true
 
 [node name="FloorSecondary" type="Node" parent="StateMachine" unique_id=1479031253]
@@ -443,13 +434,6 @@ rotation = -0.2617994
 [node name="DefaultCollisionShape" type="CollisionShape2D" parent="." unique_id=1735371359]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_ebg8m")
-
-[node name="SlidingCollisionShape" type="CollisionShape2D" parent="." unique_id=464850310]
-unique_name_in_owner = true
-position = Vector2(0, 6)
-rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_6tu5v")
-disabled = true
 
 [node name="JumpingCollisionShape" type="CollisionShape2D" parent="." unique_id=200184408]
 unique_name_in_owner = true

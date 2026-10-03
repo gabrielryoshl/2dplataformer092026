@@ -2,7 +2,7 @@ extends State
 
 
 const MOVE_SPEED: float = 200
-const ACCELERATION: float = 5
+const ACCELERATION: float = 4
 
 
 @onready var player: Player = $"../.."

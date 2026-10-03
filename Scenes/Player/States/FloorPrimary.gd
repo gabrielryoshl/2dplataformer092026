@@ -12,11 +12,9 @@ func on_enter() -> void:
 	var action_direction: int = sign(input_component.last_valid_input_direction)
 	if sign(player.velocity.x) != action_direction:
 		player.velocity.x = 0
-	else:
-		player.velocity.x *= 0.5
 	
-	player.velocity.x += 200 * action_direction
-	player.velocity.y = -(300 + abs(player.velocity.x * 0.1))
+	player.velocity.x += 150 * action_direction
+	player.velocity.y = -(300 + abs(player.velocity.x * 0.05))
 	
 	animation_player.play("FloorPrimary")
 	explosive_dust_particles_2d.emitting = true

@@ -11,6 +11,7 @@ const ACCELERATION: float = 10
 @onready var floor_primary_cooldown: Timer = %FloorPrimaryCooldown
 @onready var floor_secondary_cooldown: Timer = %FloorSecondaryCooldown
 @onready var dust_particles_2d: CPUParticles2D = %DustParticles2D
+@onready var sliding_cooldown: Timer = %SlidingCooldown
 
 
 func on_exit() -> void:
@@ -28,11 +29,15 @@ func on_process(_delta: float) -> void:
 		change_state("Jumping")
 		return
 	
-	if floor_primary_cooldown.is_stopped() and input_component.just_pressed_primary:
+	if input_component.is_pressing_slide and sliding_cooldown.is_stopped():
+		change_state("Sliding")
+		return
+	
+	if input_component.just_pressed_primary and floor_primary_cooldown.is_stopped():
 		change_state("FloorPrimary")
 		return
 	
-	if floor_secondary_cooldown.is_stopped() and input_component.just_pressed_secondary:
+	if input_component.just_pressed_secondary and floor_secondary_cooldown.is_stopped():
 		change_state("FloorSecondary")
 		return
 	
