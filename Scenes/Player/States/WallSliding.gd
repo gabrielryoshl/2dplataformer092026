@@ -55,7 +55,7 @@ func on_process(_delta: float) -> void:
 
 func on_physics_process(delta: float) -> void:
 	player.velocity -= player.wall_sliding_normal * 5
-	player.velocity.y += 50 * delta
+	player.velocity.y += 75 * delta
 	if player.velocity.y < 0:
 		player.velocity.y -= player.velocity.y * delta
 	else:

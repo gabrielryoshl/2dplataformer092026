@@ -12,9 +12,11 @@ const ACCELERATION: float = 5
 
 
 func on_enter() -> void:
+	var wall_jump_force: float = max(1 - (0.15 * player.wall_jumps), 0)
+	
 	input_component.consume_jump_buffer()
-	player.velocity.y -= 300 / (1.0 + player.wall_jumps)
-	player.velocity += player.wall_sliding_normal * 200 / (1.0 + player.wall_jumps)
+	player.velocity.y -= 300 * wall_jump_force
+	player.velocity += player.wall_sliding_normal * 200 * wall_jump_force
 	jump_cancel_timer.start()
 	if not jump_dust_particles_2d.emitting:
 		jump_dust_particles_2d.emitting = true
